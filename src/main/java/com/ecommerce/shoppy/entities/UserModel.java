@@ -27,9 +27,6 @@ public class UserModel implements Serializable {
     private String password;
     private String phone;
     private String document;
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Order> orders = new ArrayList<>();
 
     public UserModel(){}
 
