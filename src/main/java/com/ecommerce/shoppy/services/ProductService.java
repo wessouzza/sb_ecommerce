@@ -10,4 +10,8 @@ public interface ProductService {
     List<Products> getAllProducts();
 
     Products getOne(long id);
+
+    List<Products> findByName(String products);
+
+    Products findBySku(int sku);
 }

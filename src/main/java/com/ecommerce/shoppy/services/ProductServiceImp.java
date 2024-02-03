@@ -30,4 +30,26 @@ public class ProductServiceImp implements ProductService {
     public Products getOne(long id) {
         return productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Product not found."));
     }
+
+    @Override
+    public List<Products> findByName(String name) {
+        List<Products> product = productRepository.findByName(name);
+
+        if(product.isEmpty()) {
+            throw new IllegalArgumentException("Product not found.");
+        }
+
+        return product;
+    }
+
+    @Override
+    public Products findBySku(int sku) {
+        Products product = productRepository.findBySku(sku);
+
+        if(product == null) {
+            throw new IllegalArgumentException("SKU does not exist.");
+        } 
+
+        return product;
+    }
 }
