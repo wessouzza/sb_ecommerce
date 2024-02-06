@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.ecommerce.shoppy.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,11 +26,12 @@ public class Order implements Serializable {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserModel user;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
     private double price;
     private double discountPrice;
     private double finalPrice;
+    //@JsonIgnore
     @OneToMany
     private List<Products> products;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "America/Sao_Paulo")
@@ -38,8 +40,8 @@ public class Order implements Serializable {
 
     public Order(){}
 
-    public Order(UserModel user, double price, double discountPrice, double finalPrice, List<Products> products, Instant orderTime, OrderStatus orderStatus){
-        this.user = user;
+    public Order(Customer customer, double price, double discountPrice, double finalPrice, List<Products> products, Instant orderTime, OrderStatus orderStatus){
+        this.customer = customer;
         this.price = price;
         this.discountPrice = discountPrice;
         this.finalPrice = finalPrice;
@@ -55,6 +57,7 @@ public class Order implements Serializable {
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
+
 
     /*public OrderStatus getOrderstatus() {
         return OrderStatus.valueOf(orderStatus);
@@ -73,14 +76,6 @@ public class Order implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
     }
 
     public double getPrice() {
@@ -123,6 +118,15 @@ public class Order implements Serializable {
     
     public void setOrderTime(Instant orderTime) {
         this.orderTime = orderTime;
+    }
+
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
 }
