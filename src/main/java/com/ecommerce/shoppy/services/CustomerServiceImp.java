@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.ecommerce.shoppy.dto.CustomerDto;
 import com.ecommerce.shoppy.entities.Customer;
+import com.ecommerce.shoppy.exceptions.GenericErrorMsg;
 import com.ecommerce.shoppy.repositories.CustomerRepository;
 
 @Service
@@ -36,6 +37,16 @@ public class CustomerServiceImp implements CustomerService{
     @Override
     public Customer getOneById(long Id) {
         return  customerRepository.findById(Id).orElseThrow(() -> new IllegalArgumentException("Customer not found!"));
+    }
+
+    @Override
+    public Customer getByName(String name) {
+        Customer foundCustomer = customerRepository.findByName(name);
+
+        if(foundCustomer == null) {
+            throw new GenericErrorMsg("Customer nor found.");
+        }
+        return foundCustomer;
     }
     
 }

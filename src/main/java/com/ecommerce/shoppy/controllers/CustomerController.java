@@ -1,6 +1,8 @@
 package com.ecommerce.shoppy.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,5 +24,11 @@ public class CustomerController {
     public ResponseEntity<Customer> createCustomer(CustomerDto customer) {
         Customer newCustomer = customerService.createCustomer(customer);
         return ResponseEntity.ok(newCustomer);
+    }
+
+    @GetMapping("/findByName{name}")
+    public ResponseEntity<?> getByName(@PathVariable String name) {        
+        Customer foundCustomer = customerService.getByName(name);
+        return ResponseEntity.ok(foundCustomer);
     }
 }

@@ -12,4 +12,6 @@ public interface CustomerService {
     public List<Customer>  getAllCustomers();
 
     public Customer getOneById(long Id);
+
+    public Customer getByName(String name);
 }
