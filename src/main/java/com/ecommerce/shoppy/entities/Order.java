@@ -18,7 +18,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "orders")
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
