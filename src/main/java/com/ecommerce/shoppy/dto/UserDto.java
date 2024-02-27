@@ -1,5 +1,7 @@
 package com.ecommerce.shoppy.dto;
 
-public record UserDto(String username, String email, String phone){
+import com.ecommerce.shoppy.enums.UserRole;
+
+public record UserDto(String username, String email, String password, String phone, String document, UserRole role){
     
 }
